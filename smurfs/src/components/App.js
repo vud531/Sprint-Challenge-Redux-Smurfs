@@ -3,7 +3,6 @@ import './App.css';
 
 import { connect } from "react-redux";
 import { getSmurfs } from "../actions";
-import SmurfView from "./SmurfView";
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -12,6 +11,15 @@ import SmurfView from "./SmurfView";
  */
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      name:"",
+      age:null,
+      height:""
+    }
+
+  }
   componentDidMount() {
     this.props.getSmurfs();
   }
@@ -29,9 +37,14 @@ class App extends Component {
     ))
     return (
       <div className="App">
+        <form >
+          <input name="name" value={this.state.name} type="text" required/>
+          <input name="age" value={this.state.age} type="number" required/>
+          <input name="height" value={this.state.height} type="text" required/>
+        </form>
         {this.props.fetchingSmurfs ? 
             <div>Loading Smurf - Please Wait!!</div> : ""}
-        <h1>SMURFS LIST</h1>
+        <h1>SMURFS VILLAGE</h1>
 
         {smurfList}
       </div>
