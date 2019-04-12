@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class SmurfForm extends Component {
+class SmurfForm extends Component {
 
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ export default class SmurfForm extends Component {
     }
     
     onFormSubmit = event => {
-        // event.prevenDefault();
+        if (event) event.preventDefault();
         console.log(this.props)
         this.props.addSmurf(this.state);
         this.setState({
@@ -31,13 +31,13 @@ export default class SmurfForm extends Component {
     }
     
     render = () => (
-        <form onSubmit={this.onFormSubmit} >
+        <form onSubmit={() => this.onFormSubmit()} >
             <input placeholder="name" name="name" value={this.state.name} type="text" onChange={this.editSmurfInfo} required/>
             <input placeholder="age" name="age" value={this.state.age ? this.state.age : ""} type="number" onChange={this.editSmurfInfo} required/>
             <input placeholder="height" name="height" value={this.state.height} type="text" onChange={this.editSmurfInfo} required/>
-            <button type="submit">Add Smurf</button>
+            <button>Add Smurf</button>
         </form>
     )
 }
 
-// export default SmurfForm;
+export default SmurfForm;
