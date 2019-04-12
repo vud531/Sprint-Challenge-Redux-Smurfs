@@ -17,13 +17,23 @@ class App extends Component {
   }
 
   render() {
-    console.log()
+    console.log(this.props.smurf)
+    //create smuftList divs
+    const smurfList = this.props.smurf.map(smurf => (
+    <div key={smurf.name}>
+    <p>Name: {smurf.name}</p>
+    <p>Age: {smurf.age}</p>
+    <p>Heigh: {smurf.height}</p>
+    <p>---------------------------</p>
+    </div>
+    ))
     return (
       <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        {/* <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div> */}
+        {this.props.fetchingSmurfs ? 
+            <div>Loading Smurf - Please Wait!!</div> : ""}
+        <h1>SMURFS LIST</h1>
+
+        {smurfList}
       </div>
     );
   }
