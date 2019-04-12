@@ -20,8 +20,14 @@ class App extends Component {
     }
 
   }
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.getSmurfs();
+  }
+
+  editSmurfInfo = event => {
+    const currentState = this.state
+    currentState[event.target.name] = event.target.value
+    this.setState({ state: currentState })
   }
 
   render() {
@@ -38,9 +44,9 @@ class App extends Component {
     return (
       <div className="App">
         <form >
-          <input name="name" value={this.state.name} type="text" required/>
-          <input name="age" value={this.state.age} type="number" required/>
-          <input name="height" value={this.state.height} type="text" required/>
+          <input name="name" value={this.state.name} type="text" onChange={this.editSmurfInfo} required/>
+          <input name="age" value={this.state.age ? this.state.age : ""} type="number" onChange={this.editSmurfInfo} required/>
+          <input name="height" value={this.state.height} type="text" onChange={this.editSmurfInfo} required/>
         </form>
         {this.props.fetchingSmurfs ? 
             <div>Loading Smurf - Please Wait!!</div> : ""}
