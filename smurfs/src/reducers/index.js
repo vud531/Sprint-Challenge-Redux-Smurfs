@@ -70,10 +70,10 @@ export default (state=initialState, action) => {
     
     case Action.ADD_SMURFS_SUCCESS:
     return {
-      smurf: action.payload,
-      fetchingSmurfs: false,
-      addingSmurf: false,
-      error: null
+      smurf: [
+        // ...state.smurf,
+        action.payload
+      ]
     }
 
     
