@@ -5,9 +5,9 @@ import axios from 'axios';
   Be sure to export each action type so you can pull it into your reducer
 */
 
-const ADD_SMURFS_START = 'ADD_SMURFS_START';
-const ADD_SMURFS_SUCCESS = 'ADD_SMURFS_SUCCESS';
-const ADD_SMURFS_FAILURE = 'ADD_SMURFS_FAILURE';
+export const ADD_SMURFS_START = 'ADD_SMURFS_START';
+export const ADD_SMURFS_SUCCESS = 'ADD_SMURFS_SUCCESS';
+export const ADD_SMURFS_FAILURE = 'ADD_SMURFS_FAILURE';
 
 export const GET_SMURFS_START = 'GET_SMURFS_START';
 export const GET_SMURFS_SUCCESS = 'GET_SMURFS_SUCCESS';

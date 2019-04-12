@@ -2,7 +2,7 @@
   Be sure to import in all of the action types from `../actions`
 */
 
-import { GET_SMURFS_START, GET_SMURFS_SUCCESS, GET_SMURFS_FAILURE } from '../actions/index';
+import * as Action from '../actions/index';
 
 /*
  Your initial/default state for this project could *Although does not have to* look a lot like this
@@ -33,7 +33,7 @@ const initialState = {
 
 export default (state=initialState, action) => {
   switch (action.type) {
-    case GET_SMURFS_START:
+    case Action.GET_SMURFS_START:
     return {
       smurf: [],
       fetchingSmurfs: true,
@@ -42,7 +42,7 @@ export default (state=initialState, action) => {
     }
 
     
-    case GET_SMURFS_SUCCESS:
+    case Action.GET_SMURFS_SUCCESS:
     return {
       smurf: action.payload,
       fetchingSmurfs: false,
@@ -51,10 +51,36 @@ export default (state=initialState, action) => {
     }
 
     
-    case GET_SMURFS_FAILURE:
+    case Action.GET_SMURFS_FAILURE:
     return {
       smurf: [],
       fetchingSmurfs: true,
+      addingSmurf: false,
+      error: action.err
+    }    
+    
+    case Action.ADD_SMURFS_START:
+    return {
+      smurf: [],
+      fetchingSmurfs: false,
+      addingSmurf: true,
+      error: null
+    }
+
+    
+    case Action.ADD_SMURFS_SUCCESS:
+    return {
+      smurf: action.payload,
+      fetchingSmurfs: false,
+      addingSmurf: false,
+      error: null
+    }
+
+    
+    case Action.ADD_SMURFS_FAILURE:
+    return {
+      ...state,
+      fetchingSmurfs: false,
       addingSmurf: false,
       error: action.err
     }

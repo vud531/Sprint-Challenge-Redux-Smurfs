@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { connect } from "react-redux";
-import { getSmurfs } from "../actions";
+import { getSmurfs, addSmurf } from "../actions";
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -18,6 +18,7 @@ class App extends Component {
       age:null,
       height:""
     }
+    // this.onAddSmurf = this.onAddSmurf.bind(this);
 
   }
   componentDidMount = () => {
@@ -28,6 +29,19 @@ class App extends Component {
     const currentState = this.state
     currentState[event.target.name] = event.target.value
     this.setState({ state: currentState })
+  }
+
+  onSubmit = event => {
+    // event.prevenDefault();
+    console.log("hi")
+    this.props.addSmurf(this.state);
+    this.setState({
+      state: {
+        name:"",
+        age:null,
+        height:""
+      }
+    })
   }
 
   render() {
@@ -42,11 +56,12 @@ class App extends Component {
     </div>
     ))
     return (
-      <div className="App">
-        <form >
-          <input name="name" value={this.state.name} type="text" onChange={this.editSmurfInfo} required/>
-          <input name="age" value={this.state.age ? this.state.age : ""} type="number" onChange={this.editSmurfInfo} required/>
-          <input name="height" value={this.state.height} type="text" onChange={this.editSmurfInfo} required/>
+      <div className="App" >
+        <form onSubmit={this.onSubmit} >
+          <input placeholder="name" name="name" value={this.state.name} type="text" onChange={this.editSmurfInfo} required/>
+          <input placeholder="age" name="age" value={this.state.age ? this.state.age : ""} type="number" onChange={this.editSmurfInfo} required/>
+          <input placeholder="height" name="height" value={this.state.height} type="text" onChange={this.editSmurfInfo} required/>
+          <button type="submit">Add Smurf</button>
         </form>
         {this.props.fetchingSmurfs ? 
             <div>Loading Smurf - Please Wait!!</div> : ""}
@@ -70,6 +85,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    getSmurfs
+    getSmurfs,
+    addSmurf
   }
 )(App);
