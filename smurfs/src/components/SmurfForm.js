@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { getSmurfs, addSmurf } from "../actions";
+
+
 
 class SmurfForm extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          name:"",
-          age:null,
-          height:""
-        }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //       name:"",
+    //       age:null,
+    //       height:""
+    //     }
+    // }
+
+    state = {
+        name:"",
+        age:null,
+        height:""
     }
     
     editSmurfInfo = event => {
@@ -22,11 +32,9 @@ class SmurfForm extends Component {
         console.log(this.props)
         this.props.addSmurf(this.state);
         this.setState({
-            state: {
             name:"",
             age:null,
             height:""
-            }
         })
     }
     
@@ -35,9 +43,21 @@ class SmurfForm extends Component {
             <input placeholder="name" name="name" value={this.state.name} type="text" onChange={this.editSmurfInfo} required/>
             <input placeholder="age" name="age" value={this.state.age ? this.state.age : ""} type="number" onChange={this.editSmurfInfo} required/>
             <input placeholder="height" name="height" value={this.state.height} type="text" onChange={this.editSmurfInfo} required/>
-            <button>Add Smurf</button>
+            <button type="submit">Add Smurf</button>
         </form>
     )
 }
 
-export default SmurfForm;
+const mapStateToProps = state => ({
+    smurf: state.smurf,
+    fetchingSmurfs: state.fetchingSmurfs,
+    addingSmurf: state.addingSmurf,
+    error: state.error
+  });
+  
+export default connect(
+    mapStateToProps,
+    {
+      addSmurf,
+    }
+)(SmurfForm);

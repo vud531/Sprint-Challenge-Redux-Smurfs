@@ -70,17 +70,18 @@ export default (state=initialState, action) => {
     return {
       ...state,
       addingSmurf: false,
-      smurf: [...state.smurf, action.payload]
+      smurf: action.payload
     }
 
     
     case Action.ADD_SMURFS_FAILURE:
-    return {
-      ...state,
-      fetchingSmurfs: false,
-      addingSmurf: false,
-      error: action.err
-    }
+    // return {
+    //   ...state,
+    //   fetchingSmurfs: false,
+    //   addingSmurf: false,
+    //   error: action.err
+    // }
+    break;
 
     default:
     return state;
