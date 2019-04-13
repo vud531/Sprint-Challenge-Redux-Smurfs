@@ -39,18 +39,18 @@ class SmurfForm extends Component {
     }
     
     render = () => (
-        <form onSubmit={() => this.onFormSubmit()} >
+        <form 
+        // onSubmit={() => this.onFormSubmit()} 
+        >
             <input placeholder="name" name="name" value={this.state.name} type="text" onChange={this.editSmurfInfo} required/>
             <input placeholder="age" name="age" value={this.state.age ? this.state.age : ""} type="number" onChange={this.editSmurfInfo} required/>
             <input placeholder="height" name="height" value={this.state.height} type="text" onChange={this.editSmurfInfo} required/>
-            <button type="submit">Add Smurf</button>
+            <button onClick={() => this.onFormSubmit()}>Add Smurf</button>
         </form>
     )
 }
 
 const mapStateToProps = state => ({
-    smurf: state.smurf,
-    fetchingSmurfs: state.fetchingSmurfs,
     addingSmurf: state.addingSmurf,
     error: state.error
   });

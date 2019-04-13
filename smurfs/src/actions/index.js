@@ -59,6 +59,7 @@ export const addSmurf = (smurf) => dispatch => {
     });
   })
   .catch(err => {
+    console.log(err)
     dispatch({
       type: ADD_SMURFS_FAILURE,
       payload: err

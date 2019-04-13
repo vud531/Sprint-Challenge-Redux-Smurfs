@@ -56,7 +56,7 @@ export default (state=initialState, action) => {
       smurf: [],
       fetchingSmurfs: true,
       addingSmurf: false,
-      error: action.err
+      error: "no smurf found"
     }    
     
     case Action.ADD_SMURFS_START:
@@ -68,20 +68,20 @@ export default (state=initialState, action) => {
     
     case Action.ADD_SMURFS_SUCCESS:
     return {
-      ...state,
+      error: null,
+      fetchingSmurfs: false,
       addingSmurf: false,
       smurf: action.payload
     }
 
     
     case Action.ADD_SMURFS_FAILURE:
-    // return {
-    //   ...state,
-    //   fetchingSmurfs: false,
-    //   addingSmurf: false,
-    //   error: action.err
-    // }
-    break;
+    return {
+      ...state,
+      fetchingSmurfs: false,
+      addingSmurf: false,
+      error: "cant add this smurf to the village, wont tell u why"
+    }
 
     default:
     return state;
